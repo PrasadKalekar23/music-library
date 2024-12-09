@@ -93,7 +93,7 @@ export const deleteFavorite = async (req: Request, res: Response): Promise<void>
         res.status(400).json({
             status: 400,
             data: null,
-            message: 'Bad Request, Reason: Invalid Item ID format',
+            message: 'Bad Request, Reason: Invalid favorite ID format',
             error: null,
         });
         return;
