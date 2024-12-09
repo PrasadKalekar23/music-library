@@ -5,7 +5,7 @@ import { initializeDatabase } from './src/DBConnection';
 const startServer = async () =>{
     const port = config.port || 3000;
 
-    // await initializeDatabase();
+    await initializeDatabase();
 
     app.listen(port, () => {
         console.log(`server started at port: ${[port]}`);
