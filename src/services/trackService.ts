@@ -126,19 +126,20 @@ export const addTrack = async (req: Request, res: Response): Promise<void> => {
         const getArtist = await getExtistingArtist({artist_id: trackInput.artist_id});
 
         if(!getArtist){
-            await res.status(404).json({
-                status: 303,
+            res.status(404).json({
+                status: 404,
                 data: null,
                 message: 'Artist not found.',
                 error: null,
             });
+            return;
         }
 
         const existingAlbum= await getExistingAlbum({album_id: trackInput.album_id});
 
         if (!existingAlbum) {
-            await res.status(409).json({
-                status: 409,
+            res.status(404).json({
+                status: 404,
                 data: null,
                 message: 'Album not exists.',
                 error: null,
@@ -149,7 +150,7 @@ export const addTrack = async (req: Request, res: Response): Promise<void> => {
         const existingtrack = await getExistingTrack(trackInput);
 
         if (existingtrack) {
-            await res.status(409).json({
+            res.status(409).json({
                 status: 409,
                 data: null,
                 message: 'Track already exists.',
