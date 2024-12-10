@@ -101,6 +101,16 @@ export const addAlbum = async (req: Request, res: Response): Promise<void> => {
         return;
     }
 
+    if (!isUUID(albumInput?.artist_id)) {
+        res.status(400).json({
+            status: 400,
+            data: null,
+            message: 'Bad Request, Reason: Invalid Artist ID format',
+            error: null,
+        });
+        return;
+    }
+
     try {
         const getArtist = await getExtistingArtist({artist_id: albumInput.artist_id});
 
@@ -152,7 +162,7 @@ export const updateAlbum = async (req: Request, res: Response): Promise<void> =>
         res.status(400).json({
             status: 400,
             data: null,
-            message: 'Bad Request, Reason: Invalid Artist ID format',
+            message: 'Bad Request, Reason: Invalid Album ID format',
             error: null,
         });
         return;
