@@ -112,6 +112,16 @@ export const addTrack = async (req: Request, res: Response): Promise<void> => {
         return;
     }
 
+    if (!isUUID(trackInput?.artist_id) || !isUUID(trackInput?.album_id)) {
+        res.status(400).json({
+            status: 400,
+            data: null,
+            message: 'Bad Request, Reason: Invalid Artist or Album ID format',
+            error: null,
+        });
+        return;
+    }
+
     try {
         const getArtist = await getExtistingArtist({artist_id: trackInput.artist_id});
 
