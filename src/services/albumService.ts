@@ -115,12 +115,13 @@ export const addAlbum = async (req: Request, res: Response): Promise<void> => {
         const getArtist = await getExtistingArtist({artist_id: albumInput.artist_id});
 
         if(!getArtist){
-            await res.status(404).json({
+            res.status(404).json({
                 status: 303,
                 data: null,
                 message: 'Artist not found.',
                 error: null,
             });
+            return;
         }
 
         const existingAlbum = await getExistingAlbum(albumInput);
